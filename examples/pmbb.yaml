@@ -3,19 +3,23 @@ paths:
   measurement: ...
   id_to_unit: ...
 
+# define fallback concept id
+id: "measurement_concept_id"
+
 # define joins for source table
 joins:
   concept:
     path: ...
     keys: ["concept_id", "concept_name"]
-    on:
-      measurement_concept_id: concept_id
+    msmt_on: "measurement_concept_id"
+    meta_on: "concept_id"
     cardinality: one
   concept_ancestor:
     path: ...
     keys: ["descendant_concept_id", "ancestor_concept_id"]
     on:
-      measurement_concept_id: descendant_concept_id
+    msmt_on: "measurement_concept_id"
+    meta_on: "descendant_concept_id"
     cardinality: many
 
 # define how to extract numeric value, text value, and unit

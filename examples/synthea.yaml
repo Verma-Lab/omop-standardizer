@@ -2,6 +2,9 @@ paths:
     measurement: "../data/synthea/observations.csv" # relative path to measurements file
     id_to_unit: "../data/synthea/id_to_unit.csv" # relative path to id to unit file written after standardization
 
+# define fallback concept id
+id: "CODE"
+
 # define logic for extracting numeric value, unit, and text value
 values:
     numeric_value: 'F.when(F.col("TYPE") == "numeric", F.col("VALUE"))' # pyspark col expr for extracting numeric value

@@ -22,13 +22,15 @@ paths:
     measurement: <filepath> # relative path to measurements file
     id_to_unit: <filepath> # relative path to id to unit file written after standardization
 
+concept_id: <column name> # name of concept id column to fallback on for ungrouped
+
 # define joins to metadata tables used in defining measurement groups
 joins:
     table1:
-        path: <filepath> # path to metadata table
-        keys: ["key1", "key2"] # metadata columns to include
-        on:
-            measurement_join_key: metadata_join_key
+        path: <filepath> # relative path to metadata table
+        keys: ["key1", "key2"] # metadata columns to include (include join key!)
+        msmt_on: <measurement_join_key> # msmt col to join on
+        meta_on: <metadata_join_key> # metadata col to join on
         cardinality: <one/many> # whether to collect list or not
 
 # define logic for extracting numeric value, unit, and text value

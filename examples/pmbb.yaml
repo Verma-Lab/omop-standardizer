@@ -1,0 +1,291 @@
+# define paths
+paths:
+  measurement: ...
+  id_to_unit: ...
+
+# define joins for source table
+joins:
+  concept:
+    path: ...
+    keys: ["concept_id", "concept_name"]
+    on:
+      measurement_concept_id: concept_id
+    cardinality: one
+  concept_ancestor:
+    path: ...
+    keys: ["descendant_concept_id", "ancestor_concept_id"]
+    on:
+      measurement_concept_id: descendant_concept_id
+    cardinality: many
+
+# define how to extract numeric value, text value, and unit
+values:
+  numeric_value: 'F.coalesce(F.col("value_as_number"), F.col("value_source_value").try_cast("double"))'
+  text_value: 'F.when(F.col("value_source_value").try_cast("double").isNull(), F.col("value_source_value"))'
+  unit: 'F.col("unit_source_value")'
+
+# define how to group concepts
+groups:
+  vitals:
+    bp_diastolic:
+      id: 3012888
+      rule: 'F.col("measurement_concept_id") == 3012888'
+    bp_systolic:
+      id: 3004249
+      rule: 'F.col("measurement_concept_id") == 3004249'
+    bmi:
+      id: 44783982
+      rule: 'F.col("measurement_concept_id").isin(44783982, 4245997)'
+    height:
+      id: 40655804
+      rule: 'F.array_contains("ancestor_concept_id", 40655804)'
+    o2sat:
+      id: 40654168
+      rule: 'F.array_contains("ancestor_concept_id", 40654168)'
+    pulse:
+      id: 40654164
+      rule: 'F.array_contains("ancestor_concept_id", 40654164)'
+    resp_rate:
+      id: 40654163
+      rule: 'F.array_contains("ancestor_concept_id", 40654163)'
+    temperature:
+      id: 40654162
+      rule: 'F.array_contains("ancestor_concept_id", 40654162)'
+    weight:
+      id: 40655805
+      rule: 'F.array_contains("ancestor_concept_id", 40655805)'
+  labs:
+    alt:
+      id: 40652525
+      rule: 'F.array_contains("ancestor_concept_id", 40652525)'
+    albumin:
+      id: 40652534
+      rule: 'F.array_contains("ancestor_concept_id", 40652534)'
+    alp:
+      id: 40652549
+      rule: 'F.array_contains("ancestor_concept_id", 40652549)'
+    anion_gap:
+      id: 40652611
+      rule: 'F.array_contains("ancestor_concept_id", 40652611)'
+    apo_b:
+      id: 40652616
+      rule: 'F.array_contains("ancestor_concept_id", 40652616)'
+    amh:
+      id: 40653357
+      rule: 'F.array_contains("ancestor_concept_id", 40653357)'
+    ast:
+      id: 40652640
+      rule: 'F.array_contains("ancestor_concept_id", 40652640)'
+    basophils:
+      id: 40653984
+      rule: 'F.array_contains("ancestor_concept_id", 40653984)'
+    beta_globulin:
+      id: 1990626
+      rule: 'F.array_contains("ancestor_concept_id", 1990626)'
+    bilirubin_total:
+      id: 40652709
+      rule: 'F.array_contains("ancestor_concept_id", 40652709)'
+    bun:
+      id: 40653900
+      rule: 'F.array_contains("ancestor_concept_id", 40653900)'
+    crp:
+      id: 40652733
+      rule: '(F.array_contains("ancestor_concept_id", 40652733)) | (F.col("measurement_concept_id") == 3020460)'
+    crp_hs:
+      id: 40654479
+      rule: 'F.array_contains("ancestor_concept_id", 40654479)'
+    calcium:
+      id: 40652745
+      rule: 'F.array_contains("ancestor_concept_id", 40652745)'
+    chloride:
+      id: 40652796
+      rule: 'F.array_contains("ancestor_concept_id", 40652796)'
+    chol_hdl:
+      id: 40652802
+      rule: 'F.array_contains("ancestor_concept_id", 40652802)'
+    chol_ldl:
+      id: 40654572
+      rule: 'F.array_contains("ancestor_concept_id", 40654572)'
+    chol_vldl:
+      id: 40654576
+      rule: '(F.array_contains("ancestor_concept_id", 40654576)) | (F.col("measurement_concept_id") == 3009596)'
+    chol_total:
+      id: 40652808
+      rule: 'F.array_contains("ancestor_concept_id", 40652808)'
+    c4:
+      id: 40654637
+      rule: 'F.array_contains("ancestor_concept_id", 40654637)'
+    covid:
+      id: 36662633
+      rule: 'F.array_contains("ancestor_concept_id", 36662633)'
+    ck:
+      id: 40652867
+      rule: 'F.array_contains("ancestor_concept_id", 40652867)'
+    creatinine:
+      id: 40652870
+      rule: 'F.array_contains("ancestor_concept_id", 40652870)'
+    creatinine_urine:
+      id: 40656057
+      rule: 'F.array_contains("ancestor_concept_id", 40656057)'
+    ccpab:
+      id: 40652885
+      rule: 'F.array_contains("ancestor_concept_id", 40652885)'
+    eosinophils:
+      id: 40653994
+      rule: 'F.array_contains("ancestor_concept_id", 40653994)'
+    rbc:
+      id: 40654005
+      rule: 'F.array_contains("ancestor_concept_id", 40654005)'
+    rbc_urine:
+      id: 40657685
+      rule: 'F.array_contains("ancestor_concept_id", 40657685)'
+    esr:
+      id: 3015183
+      rule: '(F.array_contains("ancestor_concept_id", 4028908)) & F.lower(F.col("concept_name")).like("%eryth%") & F.lower(F.col("concept_name")).like("%sed%")'
+    ggt:
+      id: 2212371
+      rule: 'F.lower(F.col("concept_name")).like("%glutamyl%transferase%")'
+    ferritin:
+      id: 40652982
+      rule: 'F.array_contains("ancestor_concept_id", 40652982)'
+    folate:
+      id: 40652995
+      rule: 'F.array_contains("ancestor_concept_id", 40652995)'
+    glucose:
+      id: 40653085
+      rule: '(F.array_contains("ancestor_concept_id", 40653085)) & (~F.col("value_source_value").like("%,%"))'
+    glucose_fasting:
+      id: 3037110
+      rule: 'F.col("measurement_source_concept_id") == 3037110'
+    glucose_urine:
+      id: 40657691
+      rule: 'F.array_contains("ancestor_concept_id", 40657691)'
+    granulocytes:
+      id: 40654016
+      rule: 'F.array_contains("ancestor_concept_id", 40654016)'
+    hemoglobin:
+      id: 40654905
+      rule: 'F.array_contains("ancestor_concept_id", 40654905)'
+    hba1c:
+      id: 1621295
+      rule: 'F.array_contains("ancestor_concept_id", 1621295)'
+    iga:
+      id: 40653141
+      rule: 'F.array_contains("ancestor_concept_id", 40653141)'
+    igg:
+      id: 40653151
+      rule: 'F.array_contains("ancestor_concept_id", 40653151)'
+    igm:
+      id: 40653158
+      rule: 'F.array_contains("ancestor_concept_id", 40653158)'
+    inr:
+      id: 85610
+      rule: 'F.lower(F.col("concept_name")).rlike(r''.*\binr\b.*'')'
+    iron:
+      id: 40654984
+      rule: 'F.array_contains("ancestor_concept_id", 40654984)'
+    ketones:
+      id: 40656264
+      rule: '(F.array_contains("ancestor_concept_id", 40656264)) | (F.col("measurement_source_value") == "5797-6")'
+    leukocyte_esterase:
+      id: 40657703
+      rule: 'F.array_contains("ancestor_concept_id", 40657703)'
+    wbc:
+      id: 40654026
+      rule: 'F.array_contains("ancestor_concept_id", 40654026)'
+    wbc_urine:
+      id: 40657704
+      rule: 'F.array_contains("ancestor_concept_id", 40657704)'
+    lipoprotein_a:
+      id: 40655033
+      rule: 'F.array_contains("ancestor_concept_id", 40655033)'
+    lymphocytes:
+      id: 40654045
+      rule: 'F.array_contains("ancestor_concept_id", 40654045)'
+    magnesium:
+      id: 40653291
+      rule: 'F.array_contains("ancestor_concept_id", 40653291)'
+    metamyelocytes:
+      id: 40654064
+      rule: '(F.array_contains("ancestor_concept_id", 40654064)) | (F.col("measurement_concept_id").isin(3012392, 3024507))'
+    metanephrine:
+      id: 40655090
+      rule: 'F.array_contains("ancestor_concept_id", 40655090)'
+    microalbumin:
+      id: 40656529
+      rule: 'F.array_contains("ancestor_concept_id", 40656529)'
+    microalbumin_creatinine_ratio:
+      id: 40656531
+      rule: 'F.array_contains("ancestor_concept_id", 40656531)'
+    monocytes:
+      id: 40654069
+      rule: 'F.array_contains("ancestor_concept_id", 40654069)'
+    neutrophils:
+      id: 40654088
+      rule: 'F.array_contains("ancestor_concept_id", 40654088)'
+    neutrophils_bandform:
+      id: 40654083
+      rule: '(F.array_contains("ancestor_concept_id", 40654083)) | (F.col("measurement_concept_id").isin(3008939, 3018199))'
+    neutrophils_segmented:
+      id: 40654086
+      rule: '(F.array_contains("ancestor_concept_id", 40654086)) | (F.col("measurement_concept_id").isin(3027270, 3015586))'
+    normetanephrine:
+      id: 40655204
+      rule: 'F.array_contains("ancestor_concept_id", 40655204)'
+    ptt:
+      id: 2212742
+      rule: 'F.lower(F.col("concept_name")).like("%ptt%") & F.arrays_overlap("ancestor_concept_id", F.array(F.lit(1618784), F.lit(2212742)))'
+    phosphate:
+      id: 40653550
+      rule: 'F.array_contains("ancestor_concept_id", 40653550)'
+    platelets:
+      id: 40654106
+      rule: 'F.array_contains("ancestor_concept_id", 40654106)'
+    potassium:
+      id: 40653596
+      rule: 'F.array_contains("ancestor_concept_id", 40653596)'
+    prealbumin:
+      id: 40653598
+      rule: 'F.array_contains("ancestor_concept_id", 40653598)'
+    promyelocytes:
+      id: 40654115
+      rule: '(F.array_contains("ancestor_concept_id", 40654115)) | (F.col("measurement_concept_id").isin(3022709, 3024153))'
+    protein:
+      id: 40653626
+      rule: 'F.array_contains("ancestor_concept_id", 40653626)'
+    protein_urine:
+      id: 40657714
+      rule: '(F.array_contains("ancestor_concept_id", 40657714)) | (F.col("measurement_concept_id").isin(3005897, 3035511, 3014051, 3037121, 40760845))'
+    pt:
+      id: 3034426
+      rule: 'F.col("measurement_concept_id").isin(3034426, 2212731)'
+    rf:
+      id: 40653663
+      rule: '(F.array_contains("ancestor_concept_id", 40653663)) | (F.col("measurement_concept_id").isin(3021614, 3015688, 3024763))'
+    shbg:
+      id: 40655429
+      rule: 'F.array_contains("ancestor_concept_id", 40655429)'
+    sodium:
+      id: 40653762
+      rule: 'F.array_contains("ancestor_concept_id", 40653762)'
+    testosterone_free:
+      id: 40653808
+      rule: 'F.array_contains("ancestor_concept_id", 40653808)'
+    tsh:
+      id: 40653836
+      rule: 'F.array_contains("ancestor_concept_id", 40653836)'
+    transferrin:
+      id: 1990650
+      rule: 'F.array_contains("ancestor_concept_id", 1990650)'
+    triglycerides:
+      id: 40653862
+      rule: 'F.array_contains("ancestor_concept_id", 40653862)'
+    troponin_i:
+      id: 40653873
+      rule: 'F.array_contains("ancestor_concept_id", 40653873)'
+    troponin_t:
+      id: 40653874
+      rule: 'F.array_contains("ancestor_concept_id", 40653874)'
+    urobilinogen:
+      id: 40656506
+      rule: 'F.array_contains("ancestor_concept_id", 40656506)'

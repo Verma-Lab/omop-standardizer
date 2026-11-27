@@ -9,4 +9,4 @@ id: "CODE"
 values:
     numeric_value: 'F.when(F.col("TYPE") == "numeric", F.col("VALUE"))' # pyspark col expr for extracting numeric value
     text_value: 'F.when(F.col("TYPE") == "text", F.col("VALUE"))' # pyspark col expr for extracting text value
-    unit: 'F.when(F.col("TYPE") == "numeric", F.col("UNIT"))' # pyspark col expr for extracting unit assoc. w/ numeric value
+    unit: 'F.when(F.col("TYPE") == "numeric", F.col("UNITS"))' # pyspark col expr for extracting unit assoc. w/ numeric value

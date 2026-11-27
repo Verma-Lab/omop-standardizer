@@ -44,4 +44,5 @@ groups:
         bucket1: # e.g. albumin
             id: <integer> # integer id to standardize bucket concept_id to (concept_id_std)
             rule: <pyspark column expression> # pyspark boolean col expr to define bucket membership
+            unit: <unit> # name of unit to convert to
 ```

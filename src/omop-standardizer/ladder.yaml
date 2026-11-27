@@ -1,0 +1,105 @@
+# GUARANTEE: each unit is in only one ladder
+
+mass_concentration:
+  g/L: 1.0
+  g/dL: 0.1
+  g/mL: 0.001
+  mg/L: 1000.0
+  mg/dL: 100.0
+  mg/mL: 1.0
+  ug/L: 1000000.0
+  ug/dL: 100000.0
+  ug/mL: 1000.0
+  mcg/L: 1000000.0
+  mcg/dL: 100000.0
+  mcg/mL: 1000.0
+  ng/L: 1000000000.0
+  ng/dL: 100000000.0
+  ng/mL: 1000000.0
+  pg/mL: 1000000000.0
+
+molar_concentration:
+  mol/L: 1.0
+  mmol/L: 1000.0
+  umol/L: 1000000.0
+  nmol/L: 1000000000.0
+  pmol/L: 1000000000000.0
+
+international_units:
+  IU/L: 1.0
+  U/L: 1.0
+  Unit/L: 1.0
+  mIU/L: 1000.0
+  mIU/mL: 1.0
+  uIU/mL: 1000.0
+  IU/mL: 0.001
+  International Units/mL: 0.001
+
+cell_count:
+  Cells/uL: 1.0
+  cells/mm3: 1.0
+  Cells/mL: 1000.0
+  Cells/L: 1000000.0
+  Thousand/uL: 0.001
+  10^3/uL: 0.001
+  10^9/L: 0.001
+  Million/uL: 0.000001
+  10^6/uL: 0.000001
+  10^12/L: 0.000001
+
+length:
+  m: 1.0
+  cm: 100.0
+  mm: 1000.0
+  Inches: 39.37007874015748
+  Feet: 3.280839895013123
+
+mass:
+  kg: 1.0
+  g: 1000.0
+  mg: 1000000.0
+  pg: 1000000000000000.0
+  lb: 2.2046226218487757
+  oz: 35.27396194958041
+
+volume:
+  L: 1.0
+  dL: 10.0
+  mL: 1000.0
+  uL: 1000000.0
+  fL: 1000000000000000.0
+
+pressure:
+  mmHg: 1.0
+  kPa: 0.133322387415
+  cmH2O: 1.359509806
+
+time:
+  Second(s): 1.0
+  ms: 1000.0
+  min: 0.016666666666666666
+  h: 0.0002777777777777778
+
+fraction:
+  fraction: 1.0
+  "%": 100.0
+  mcg/mg: 1000.0
+  mg/g: 1000.0
+
+Leu/uL:
+  Leu/uL: 1.0
+
+Counts/Min:
+  Counts/Min: 1.0
+
+mm/h:
+  mm/h: 1.0
+
+kg/m^2:
+  kg/m^2: 1.0
+
+mL/min/1.73m2:
+  mL/min/1.73m2: 1.0
+
+/hpf:
+  /hpf: 1.0
